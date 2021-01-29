@@ -31,7 +31,7 @@ if($PASSWORD) {
 			$_SESSION['_sfm_allowed'] = true;
 			header('Location: ?');
 		}
-		echo '<html><body><form action=? method=post>PASSWORD:<input type=password name=p autofocus/></form></body></html>';
+		echo '<html><body><form action=? method=post>Please enter your password:<input type=password name=p autofocus/></form></body></html>';
 		exit;
 	}
 }
