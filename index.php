@@ -133,13 +133,18 @@ if($_GET['do'] == 'list') {
     // listen to the rename event
 }elseif ($_GET['do'] == 'rename'){
     // validate if the file name is FileToBeRenamed.txt
-    if($file == 'FileToBeRenamed.txt'){
-        // get the path
-        $dir_father = dirname(__FILE__);
+    $name_file = "FileToBeRenamed.txt";
+    if(strpos($file, $name_file) !== false){
         //file exist
-        if(file_exists($dir_father.'/'.'FileToBeRenamed.txt')){
-            // rename FileToBeRenamed.txt file to FileRenamed.txt
-            rename($dir_father.'/'.'FileToBeRenamed.txt','FileRenamed.txt');
+        if(file_exists(realpath($file))){
+            // separate the path to clear the old file name and thus keep the base directory and rename
+            $split_path = explode('\\',realpath($file));
+            $base_path = "";
+            for ($i = 0; $i < count($split_path)-1; $i++) {
+                $base_path = $base_path.$split_path[$i].'/';
+            }
+            // rename the file from File TuBeRenamed.txt to FileRenamed.txt even though the file is in subdirectories
+            rename(realpath($file),$base_path.'FileRenamed.txt');
         }
 
     }
